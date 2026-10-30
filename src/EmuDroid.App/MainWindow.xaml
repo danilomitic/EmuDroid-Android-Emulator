@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:EmuDroid.App.ViewModels"
         xmlns:views="clr-namespace:EmuDroid.App.Views"
-        Title="EmuDroid" Width="1120" Height="720" MinWidth="820" MinHeight="560"
+        Title="EmuDroid" Icon="/Assets/emudroid.ico" Width="1120" Height="720" MinWidth="820" MinHeight="560"
         WindowStartupLocation="CenterScreen"
         Background="{StaticResource InkBrush}" Foreground="{StaticResource TextBrush}"
         UseLayoutRounding="True" TextOptions.TextFormattingMode="Display">

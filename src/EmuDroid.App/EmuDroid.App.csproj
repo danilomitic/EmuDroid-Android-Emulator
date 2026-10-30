@@ -15,6 +15,14 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <AssemblyName>EmuDroid</AssemblyName>
+    <RootNamespace>EmuDroid.App</RootNamespace>
+    <ApplicationIcon>Assets\emudroid.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\emudroid.ico" />
+  </ItemGroup>
 
 </Project>

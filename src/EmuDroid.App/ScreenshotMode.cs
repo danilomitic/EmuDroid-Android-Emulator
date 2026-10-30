@@ -10,7 +10,7 @@ namespace EmuDroid.App;
 /// <summary>
 /// Developer tool: renders a screen to PNG and exits. Uses a throw-away data folder with sample instances,
 /// so it never touches the user's real EmuDroid data. Used for README screenshots and UI checks.
-///   EmuDroid.App.exe --screenshot out.png --view home|settings|wizard [--step SystemCheck]
+///   EmuDroid.exe --screenshot out.png --view home|settings|wizard [--step SystemCheck]
 /// </summary>
 public static class ScreenshotMode
 {
