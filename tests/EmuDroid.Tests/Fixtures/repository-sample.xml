@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdk:sdk-repository xmlns:sdk="http://schemas.android.com/sdk/android/repo/repository2/03" xmlns:common="http://schemas.android.com/repository/android/common/02" xmlns:generic="http://schemas.android.com/repository/android/generic/02" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <license id="android-sdk-license" type="text">Terms and Conditions sample</license>
+  <license id="android-sdk-preview-license" type="text">Preview terms sample</license>
+  <channel id="channel-0">stable</channel>
+  <channel id="channel-2">dev</channel>
+  <remotePackage path="platform-tools">
+    <type-details xsi:type="generic:genericDetailsType"/>
+    <revision><major>37</major><minor>0</minor><micro>1</micro></revision>
+    <display-name>Android SDK Platform-Tools</display-name>
+    <uses-license ref="android-sdk-license"/>
+    <channelRef ref="channel-0"/>
+    <archives>
+      <archive>
+        <complete><size>9054187</size><checksum type="sha1">477254aa5f903c15cf51001717bdf347fb6b53e0</checksum><url>platform-tools_r37.0.1-linux.zip</url></complete>
+        <host-os>linux</host-os>
+      </archive>
+      <archive>
+        <complete><size>8044989</size><checksum type="sha1">E03E78B1D80B396F1C3358E31251CB31740E1110</checksum><url>platform-tools_r37.0.1-win.zip</url></complete>
+        <host-os>windows</host-os>
+      </archive>
+    </archives>
+  </remotePackage>
+  <remotePackage path="emulator">
+    <type-details xsi:type="generic:genericDetailsType"/>
+    <revision><major>37</major><minor>3</minor><micro>6</micro></revision>
+    <display-name>Android Emulator</display-name>
+    <uses-license ref="android-sdk-preview-license"/>
+    <channelRef ref="channel-2"/>
+    <archives>
+      <archive>
+        <complete><size>460366285</size><checksum type="sha1">a77fc745377fc3224255706fd8b77a5066756047</checksum><url>emulator-windows_x64-16696583.zip</url></complete>
+        <host-os>windows</host-os><host-arch>x64</host-arch>
+      </archive>
+    </archives>
+  </remotePackage>
+  <remotePackage path="emulator">
+    <type-details xsi:type="generic:genericDetailsType"/>
+    <revision><major>37</major><minor>2</minor><micro>13</micro></revision>
+    <display-name>Android Emulator</display-name>
+    <uses-license ref="android-sdk-license"/>
+    <channelRef ref="channel-0"/>
+    <archives>
+      <archive>
+        <complete><size>349658551</size><checksum type="sha1">1111111111111111111111111111111111111111</checksum><url>emulator-linux_x64-1.zip</url></complete>
+        <host-os>linux</host-os><host-arch>x64</host-arch>
+      </archive>
+      <archive>
+        <complete><size>450000000</size><checksum type="sha1">2222222222222222222222222222222222222222</checksum><url>emulator-windows_x64-1.zip</url></complete>
+        <host-os>windows</host-os><host-arch>x64</host-arch>
+      </archive>
+    </archives>
+  </remotePackage>
+  <remotePackage path="emulator" obsolete="true">
+    <revision><major>99</major></revision>
+    <display-name>Obsolete emulator</display-name>
+    <obsolete/>
+    <channelRef ref="channel-0"/>
+    <archives>
+      <archive><complete><size>1</size><checksum type="sha1">3333333333333333333333333333333333333333</checksum><url>old.zip</url></complete><host-os>windows</host-os></archive>
+    </archives>
+  </remotePackage>
+</sdk:sdk-repository>

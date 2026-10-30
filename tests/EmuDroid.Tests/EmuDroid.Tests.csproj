@@ -24,4 +24,8 @@
     <ProjectReference Include="..\..\src\EmuDroid.Core\EmuDroid.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Fixtures\**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>

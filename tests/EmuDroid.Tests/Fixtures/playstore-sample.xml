@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sys-img:sdk-sys-img xmlns:sys-img="http://schemas.android.com/sdk/android/repo/sys-img2/03" xmlns:common="http://schemas.android.com/repository/android/common/02" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <license id="android-sdk-license" type="text">Terms and Conditions sample</license>
+  <channel id="channel-0">stable</channel>
+  <channel id="channel-1">beta</channel>
+  <remotePackage path="system-images;android-34;google_apis_playstore;x86_64">
+    <type-details xsi:type="sys-img:sysImgDetailsType">
+      <api-level>34</api-level>
+      <tag><id>google_apis_playstore</id><display>Google Play</display></tag>
+      <abi>x86_64</abi>
+    </type-details>
+    <revision><major>14</major></revision>
+    <display-name>Google Play Intel x86_64 Atom System Image</display-name>
+    <uses-license ref="android-sdk-license"/>
+    <channelRef ref="channel-0"/>
+    <archives><archive><complete><size>1510752654</size><checksum type="sha1">01d32617fd1937e540faf8731d70cf50e35af854</checksum><url>x86_64-34_r14.zip</url></complete></archive></archives>
+  </remotePackage>
+  <remotePackage path="system-images;android-34;google_apis_playstore;x86_64">
+    <type-details xsi:type="sys-img:sysImgDetailsType">
+      <api-level>34</api-level>
+      <tag><id>google_apis_playstore</id><display>Google Play</display></tag>
+      <abi>x86_64</abi>
+    </type-details>
+    <revision><major>12</major></revision>
+    <display-name>Older revision</display-name>
+    <channelRef ref="channel-0"/>
+    <archives><archive><complete><size>1</size><checksum type="sha1">4444444444444444444444444444444444444444</checksum><url>x86_64-34_r12.zip</url></complete></archive></archives>
+  </remotePackage>
+  <remotePackage path="system-images;android-34-ext10;google_apis_playstore;x86_64">
+    <type-details xsi:type="sys-img:sysImgDetailsType"><api-level>34x</api-level><abi>x86_64</abi></type-details>
+    <revision><major>2</major></revision>
+    <display-name>Extension image</display-name>
+    <channelRef ref="channel-0"/>
+    <archives><archive><complete><size>1</size><checksum type="sha1">5555555555555555555555555555555555555555</checksum><url>ext.zip</url></complete></archive></archives>
+  </remotePackage>
+  <remotePackage path="system-images;android-35;google_apis_playstore_ps16k;x86_64">
+    <type-details xsi:type="sys-img:sysImgDetailsType"><api-level>35</api-level><abi>x86_64</abi></type-details>
+    <revision><major>3</major></revision>
+    <display-name>16k image</display-name>
+    <channelRef ref="channel-0"/>
+    <archives><archive><complete><size>1</size><checksum type="sha1">6666666666666666666666666666666666666666</checksum><url>16k.zip</url></complete></archive></archives>
+  </remotePackage>
+  <remotePackage path="system-images;android-35;google_apis_playstore;x86_64">
+    <type-details xsi:type="sys-img:sysImgDetailsType"><api-level>35</api-level><abi>x86_64</abi></type-details>
+    <revision><major>2</major></revision>
+    <display-name>Google Play 35</display-name>
+    <channelRef ref="channel-0"/>
+    <archives><archive><complete><size>1600000000</size><checksum type="sha1">7777777777777777777777777777777777777777</checksum><url>x86_64-35_r02.zip</url></complete></archive></archives>
+  </remotePackage>
+  <remotePackage path="system-images;android-36;google_apis_playstore;x86_64">
+    <type-details xsi:type="sys-img:sysImgDetailsType"><api-level>36</api-level><abi>x86_64</abi></type-details>
+    <revision><major>1</major></revision>
+    <display-name>Beta 36</display-name>
+    <channelRef ref="channel-1"/>
+    <archives><archive><complete><size>1</size><checksum type="sha1">8888888888888888888888888888888888888888</checksum><url>beta.zip</url></complete></archive></archives>
+  </remotePackage>
+  <remotePackage path="system-images;android-29;google_apis_playstore;x86_64">
+    <type-details xsi:type="sys-img:sysImgDetailsType"><api-level>29</api-level><abi>x86_64</abi></type-details>
+    <revision><major>8</major></revision>
+    <display-name>Old Android 10</display-name>
+    <channelRef ref="channel-0"/>
+    <archives><archive><complete><size>1</size><checksum type="sha1">9999999999999999999999999999999999999999</checksum><url>x86_64-29.zip</url></complete></archive></archives>
+  </remotePackage>
+</sys-img:sdk-sys-img>
