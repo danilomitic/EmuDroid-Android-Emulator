@@ -1,0 +1,23 @@
+# Build output
+bin/
+obj/
+publish/
+artifacts/
+installer/Output/
+*.user
+.vs/
+.idea/
+TestResults/
+
+# Google binaries must never be committed (downloaded at runtime)
+sdk/
+system-images/
+*.img
+*.qcow2
+emulator/
+platform-tools/
+*.zip
+
+# Local secrets
+*.pfx
+*.env

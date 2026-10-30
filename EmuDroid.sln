@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D5D83E15-49AD-4371-B6D0-D6354E500CD3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmuDroid.App", "src\EmuDroid.App\EmuDroid.App.csproj", "{D08B3107-6318-4D56-9E81-ED688A692C06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmuDroid.Core", "src\EmuDroid.Core\EmuDroid.Core.csproj", "{F656AEFC-E02B-48EC-B593-E90F503BEED0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmuDroid.Keymap", "src\EmuDroid.Keymap\EmuDroid.Keymap.csproj", "{9CA842B5-0180-4F09-8EF6-A39D50FE87AA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{76C157C2-B227-4892-B5E1-96E873606866}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmuDroid.Tests", "tests\EmuDroid.Tests\EmuDroid.Tests.csproj", "{43DEFB3B-CAF9-4171-80A7-26D8E2FD1053}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D08B3107-6318-4D56-9E81-ED688A692C06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D08B3107-6318-4D56-9E81-ED688A692C06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D08B3107-6318-4D56-9E81-ED688A692C06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D08B3107-6318-4D56-9E81-ED688A692C06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F656AEFC-E02B-48EC-B593-E90F503BEED0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F656AEFC-E02B-48EC-B593-E90F503BEED0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F656AEFC-E02B-48EC-B593-E90F503BEED0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F656AEFC-E02B-48EC-B593-E90F503BEED0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CA842B5-0180-4F09-8EF6-A39D50FE87AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CA842B5-0180-4F09-8EF6-A39D50FE87AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CA842B5-0180-4F09-8EF6-A39D50FE87AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CA842B5-0180-4F09-8EF6-A39D50FE87AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43DEFB3B-CAF9-4171-80A7-26D8E2FD1053}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43DEFB3B-CAF9-4171-80A7-26D8E2FD1053}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43DEFB3B-CAF9-4171-80A7-26D8E2FD1053}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43DEFB3B-CAF9-4171-80A7-26D8E2FD1053}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D08B3107-6318-4D56-9E81-ED688A692C06} = {D5D83E15-49AD-4371-B6D0-D6354E500CD3}
+		{F656AEFC-E02B-48EC-B593-E90F503BEED0} = {D5D83E15-49AD-4371-B6D0-D6354E500CD3}
+		{9CA842B5-0180-4F09-8EF6-A39D50FE87AA} = {D5D83E15-49AD-4371-B6D0-D6354E500CD3}
+		{43DEFB3B-CAF9-4171-80A7-26D8E2FD1053} = {76C157C2-B227-4892-B5E1-96E873606866}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,12 @@
+<Project>
+  <!-- Single source of truth for the version. Used by the app, the installer and the updater. -->
+  <PropertyGroup>
+    <Version>0.1.0</Version>
+    <Product>EmuDroid</Product>
+    <Company>EmuDroid</Company>
+    <Copyright>Copyright (c) 2026 danilomitic</Copyright>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+</Project>
