@@ -1,0 +1,97 @@
+<UserControl x:Class="EmuDroid.App.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             IsVisibleChanged="OnVisibleChanged">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="36,32,36,32">
+        <StackPanel MaxWidth="720" HorizontalAlignment="Left">
+            <TextBlock Text="Settings" Style="{StaticResource TitleText}" Margin="0,0,0,28" />
+
+            <!-- System -->
+            <TextBlock Text="Your PC" Style="{StaticResource HeadingText}" Margin="0,0,0,10" />
+            <Border Style="{StaticResource Panel}" Margin="0,0,0,32">
+                <StackPanel>
+                    <TextBlock Text="{Binding CheckTitle}" Style="{StaticResource BodyText}" FontWeight="SemiBold" />
+                    <TextBlock Text="{Binding CheckMessage}" Style="{StaticResource MutedText}" Margin="0,6,0,0" />
+                    <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
+                        <Button Style="{StaticResource PrimaryButton}" Content="Turn on Windows Hypervisor Platform" Command="{Binding EnableWhpxCommand}"
+                                Visibility="{Binding CanEnableWhpx, Converter={StaticResource BoolToVis}}" Margin="0,0,10,0" />
+                        <Button Content="Check again" Command="{Binding CheckSystemCommand}" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Android versions -->
+            <TextBlock Text="Android versions" Style="{StaticResource HeadingText}" Margin="0,0,0,4" />
+            <TextBlock Text="Downloaded versions can be used by any number of instances." Style="{StaticResource MutedText}" Margin="0,0,0,10" />
+            <Border Style="{StaticResource Panel}" Padding="8" Margin="0,0,0,32">
+                <StackPanel>
+                    <TextBlock Text="{Binding ImagesError}" Style="{StaticResource BodyText}" Foreground="{StaticResource ErrorBrush}" Margin="12"
+                               Visibility="{Binding ImagesError, Converter={StaticResource NotNullToVis}}" />
+                    <ItemsControl ItemsSource="{Binding Images}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <DockPanel Margin="12,8">
+                                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Activity}" Style="{StaticResource MutedText}" VerticalAlignment="Center" Margin="0,0,12,0" />
+                                        <Button Content="Download" Command="{Binding DownloadCommand}" Padding="12,5"
+                                                Visibility="{Binding IsInstalled, Converter={StaticResource InverseBoolToVis}}" />
+                                        <Button Style="{StaticResource GhostButton}" Content="Remove" Command="{Binding RemoveCommand}"
+                                                Visibility="{Binding IsInstalled, Converter={StaticResource BoolToVis}}" />
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Name}" Style="{StaticResource BodyText}" FontWeight="SemiBold" />
+                                        <TextBlock Text="{Binding StatusText}" Style="{StaticResource MutedText}" FontSize="12" />
+                                    </StackPanel>
+                                </DockPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+
+            <!-- Updates -->
+            <TextBlock Text="Updates" Style="{StaticResource HeadingText}" Margin="0,0,0,10" />
+            <Border Style="{StaticResource Panel}" Margin="0,0,0,32">
+                <StackPanel>
+                    <CheckBox Content="Check for EmuDroid updates automatically" IsChecked="{Binding AutoUpdate}" />
+                    <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
+                        <Button Content="Check now" Command="{Binding Updates.CheckNowCommand}" />
+                        <Button Style="{StaticResource PrimaryButton}" Content="Update now" Command="{Binding Updates.InstallCommand}" Margin="10,0,0,0"
+                                Visibility="{Binding Updates.Available, Converter={StaticResource NotNullToVis}}" />
+                        <TextBlock Text="{Binding Updates.Status}" Style="{StaticResource MutedText}" VerticalAlignment="Center" Margin="14,0,0,0" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Troubleshooting -->
+            <TextBlock Text="Troubleshooting" Style="{StaticResource HeadingText}" Margin="0,0,0,10" />
+            <Border Style="{StaticResource Panel}" Margin="0,0,0,32">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource MutedText}">
+                        <Run Text="EmuDroid keeps its files in " /><Run Text="{Binding DataFolder, Mode=OneWay}" Foreground="{StaticResource TextBrush}" />
+                    </TextBlock>
+                    <StackPanel Orientation="Horizontal" Margin="0,14,0,0">
+                        <Button Content="Open logs" Command="{Binding OpenLogsCommand}" Margin="0,0,10,0" />
+                        <Button Content="Open data folder" Command="{Binding OpenDataFolderCommand}" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- About -->
+            <TextBlock Text="About" Style="{StaticResource HeadingText}" Margin="0,0,0,10" />
+            <Border Style="{StaticResource Panel}">
+                <StackPanel>
+                    <TextBlock Text="{Binding VersionText}" Style="{StaticResource BodyText}" FontWeight="SemiBold" />
+                    <TextBlock Style="{StaticResource MutedText}" Margin="0,8,0,0">
+                        Open source under the MIT License.
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MutedText}" Margin="0,8,0,0">
+                        Android and Google Play are trademarks of Google LLC. EmuDroid is not affiliated with Google. The Android Emulator, platform tools and system images are downloaded directly from Google under the Android SDK License.
+                    </TextBlock>
+                    <Button Style="{StaticResource GhostButton}" Content="View on GitHub" Command="{Binding OpenRepositoryCommand}"
+                            HorizontalAlignment="Left" Margin="-10,10,0,0" />
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

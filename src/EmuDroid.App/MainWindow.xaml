@@ -1,12 +1,48 @@
-﻿<Window x:Class="EmuDroid.App.MainWindow"
+<Window x:Class="EmuDroid.App.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:EmuDroid.App"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        xmlns:vm="clr-namespace:EmuDroid.App.ViewModels"
+        xmlns:views="clr-namespace:EmuDroid.App.Views"
+        Title="EmuDroid" Width="1120" Height="720" MinWidth="820" MinHeight="560"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource InkBrush}" Foreground="{StaticResource TextBrush}"
+        UseLayoutRounding="True" TextOptions.TextFormattingMode="Display">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:WizardViewModel}">
+            <views:WizardView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:MainViewModel}">
+            <views:ShellView />
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
+        <ContentControl Content="{Binding Current}" Focusable="False" />
 
+        <!-- Toast -->
+        <Border VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="24" MaxWidth="620"
+                Padding="18,12" CornerRadius="10" BorderThickness="1"
+                Background="{StaticResource RaisedBrush}" BorderBrush="{StaticResource LineBrush}"
+                Visibility="{Binding Toast, Converter={StaticResource NotNullToVis}}">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="24" ShadowDepth="6" Opacity="0.45" Color="Black" />
+            </Border.Effect>
+            <DockPanel>
+                <Button DockPanel.Dock="Right" Style="{StaticResource GhostButton}" Content="Dismiss" Margin="16,0,0,0"
+                        Command="{Binding DismissToastCommand}" />
+                <Rectangle Width="4" RadiusX="2" RadiusY="2" Margin="0,0,12,0">
+                    <Rectangle.Style>
+                        <Style TargetType="Rectangle">
+                            <Setter Property="Fill" Value="{StaticResource RunningBrush}" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ToastIsError}" Value="True">
+                                    <Setter Property="Fill" Value="{StaticResource ErrorBrush}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Rectangle.Style>
+                </Rectangle>
+                <TextBlock Text="{Binding Toast}" Style="{StaticResource BodyText}" VerticalAlignment="Center" />
+            </DockPanel>
+        </Border>
     </Grid>
 </Window>

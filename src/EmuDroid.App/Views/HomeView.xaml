@@ -1,0 +1,123 @@
+<UserControl x:Class="EmuDroid.App.Views.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             AllowDrop="True" DragOver="OnDragOver" Drop="OnDrop" Background="Transparent">
+    <UserControl.Resources>
+        <!-- The phone's screen lights up with the instance state: the one bold element of the UI -->
+        <LinearGradientBrush x:Key="ScreenOn" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#7F9BFF" Offset="0" />
+            <GradientStop Color="#5E7BEA" Offset="0.55" />
+            <GradientStop Color="#52C98F" Offset="1" />
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="ScreenBooting" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#3A3424" Offset="0" />
+            <GradientStop Color="#1C1A15" Offset="1" />
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="ScreenOff" Color="#121620" />
+    </UserControl.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="36,32,20,32">
+        <StackPanel>
+            <DockPanel Margin="0,0,16,6">
+                <Button DockPanel.Dock="Right" Style="{StaticResource PrimaryButton}" Content="New instance" Command="{Binding NewInstanceCommand}"
+                        VerticalAlignment="Center" />
+                <TextBlock Text="Instances" Style="{StaticResource TitleText}" />
+            </DockPanel>
+            <TextBlock Style="{StaticResource MutedText}" Margin="0,0,16,28">
+                To install an app, drag its .apk file onto a running instance.
+            </TextBlock>
+
+            <!-- Empty state -->
+            <Border Style="{StaticResource Panel}" Padding="32" Margin="0,0,16,0" HorizontalAlignment="Left" MaxWidth="520"
+                    Visibility="{Binding IsEmpty, Converter={StaticResource BoolToVis}}">
+                <StackPanel>
+                    <TextBlock Text="No instances yet" Style="{StaticResource HeadingText}" />
+                    <TextBlock Style="{StaticResource BodyText}" Foreground="{StaticResource MutedBrush}" Margin="0,8,0,20">
+                        An instance is one Android phone with its own apps and Google account. Create one to get started.
+                    </TextBlock>
+                    <Button Style="{StaticResource PrimaryButton}" Content="Create instance" Command="{Binding NewInstanceCommand}" HorizontalAlignment="Left" />
+                </StackPanel>
+            </Border>
+
+            <ItemsControl ItemsSource="{Binding Instances}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Style="{StaticResource Panel}" Width="440" Margin="0,0,16,16" Padding="18" AllowDrop="True" Drop="OnCardDrop" DragOver="OnDragOver">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Phone -->
+                                <Border Width="98" Height="176" CornerRadius="18" BorderThickness="3" BorderBrush="{StaticResource LineBrush}"
+                                        Background="{StaticResource InkBrush}" VerticalAlignment="Top">
+                                    <Border x:Name="Screen" Margin="4" CornerRadius="13" Background="{StaticResource ScreenOff}">
+                                        <StackPanel VerticalAlignment="Center">
+                                            <TextBlock x:Name="Big" Text="{Binding Config.AndroidName, Converter={StaticResource AndroidNumber}}" HorizontalAlignment="Center"
+                                                       FontFamily="{StaticResource DisplayFont}" FontSize="40" FontWeight="Bold" Foreground="{StaticResource LineBrush}" />
+                                            <TextBlock x:Name="Small" Text="Android" HorizontalAlignment="Center" FontSize="11" Foreground="{StaticResource LineBrush}" />
+                                        </StackPanel>
+                                    </Border>
+                                </Border>
+
+                                <!-- Details -->
+                                <DockPanel Grid.Column="1" Margin="20,2,0,0" LastChildFill="False">
+                                    <TextBlock DockPanel.Dock="Top" Text="{Binding Config.DisplayName}" Style="{StaticResource HeadingText}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" />
+                                    <TextBlock DockPanel.Dock="Top" Text="{Binding Subtitle}" Style="{StaticResource MutedText}" Margin="0,4,0,0" />
+                                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,12,0,0">
+                                        <Ellipse Width="8" Height="8" Fill="{Binding State, Converter={StaticResource StateToBrush}}" VerticalAlignment="Center" />
+                                        <TextBlock Text="{Binding StatusText}" Style="{StaticResource BodyText}" FontSize="13" Margin="8,0,0,0" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                    <ProgressBar DockPanel.Dock="Top" Value="{Binding ActivityProgress, Mode=OneWay}" Maximum="1" Height="6" Margin="0,10,0,0"
+                                                 Visibility="{Binding Activity, Converter={StaticResource NotNullToVis}}" />
+                                    <TextBlock DockPanel.Dock="Top" Text="{Binding Error}" Style="{StaticResource BodyText}" FontSize="12.5" LineHeight="18"
+                                               Foreground="{StaticResource ErrorBrush}" Margin="0,10,0,0"
+                                               Visibility="{Binding Error, Converter={StaticResource NotNullToVis}}" />
+
+                                    <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="0,14,0,0">
+                                        <Button Style="{StaticResource PrimaryButton}" Content="Start" Command="{Binding StartCommand}" MinWidth="84"
+                                                Visibility="{Binding IsStopped, Converter={StaticResource BoolToVis}}" />
+                                        <Button Content="Stop" Command="{Binding StopCommand}" MinWidth="84"
+                                                Visibility="{Binding IsStopped, Converter={StaticResource InverseBoolToVis}}" />
+                                        <Button Content="Controls" Command="{Binding OpenKeymapCommand}" Margin="8,0,0,0" ToolTip="Keyboard and mouse controls for games"
+                                                Visibility="{Binding IsRunning, Converter={StaticResource BoolToVis}}" />
+                                        <Button Style="{StaticResource GhostButton}" Content="Settings" Command="{Binding EditCommand}" Margin="8,0,0,0" />
+                                        <Button Style="{StaticResource GhostButton}" Content="More" Click="OnMoreClick">
+                                            <Button.ContextMenu>
+                                                <ContextMenu>
+                                                    <MenuItem Header="Rename" Command="{Binding RenameCommand}" />
+                                                    <MenuItem Header="Clone" Command="{Binding CloneCommand}" />
+                                                    <MenuItem Header="Open folder" Command="{Binding OpenFolderCommand}" />
+                                                    <MenuItem Header="Reset to factory settings" Command="{Binding WipeCommand}" />
+                                                    <MenuItem Header="Delete" Command="{Binding DeleteCommand}" Foreground="{StaticResource ErrorBrush}" />
+                                                </ContextMenu>
+                                            </Button.ContextMenu>
+                                        </Button>
+                                    </StackPanel>
+                                </DockPanel>
+                            </Grid>
+                        </Border>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding State}" Value="Running">
+                                <Setter TargetName="Screen" Property="Background" Value="{StaticResource ScreenOn}" />
+                                <Setter TargetName="Big" Property="Foreground" Value="#F4F6FF" />
+                                <Setter TargetName="Small" Property="Foreground" Value="#DDE4FF" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding State}" Value="Booting">
+                                <Setter TargetName="Screen" Property="Background" Value="{StaticResource ScreenBooting}" />
+                                <Setter TargetName="Big" Property="Foreground" Value="{StaticResource BootingBrush}" />
+                                <Setter TargetName="Small" Property="Foreground" Value="{StaticResource BootingBrush}" />
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
