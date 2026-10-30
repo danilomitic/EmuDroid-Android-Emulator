@@ -17,6 +17,8 @@ public sealed class AppPaths
     public string Keymaps => Path.Combine(Root, "keymaps");
     public string Logs => Path.Combine(Root, "logs");
     public string Downloads => Path.Combine(Root, "downloads");
+    /// <summary>Emulator settings and locks (ANDROID_USER_HOME). The emulator expects it to exist.</summary>
+    public string AndroidUser => Path.Combine(Root, "android-user");
     public string SettingsFile => Path.Combine(Root, "settings.json");
 
     public string EmulatorExe => Path.Combine(Sdk, "emulator", "emulator.exe");
@@ -28,7 +30,7 @@ public sealed class AppPaths
 
     public void EnsureCreated()
     {
-        foreach (var dir in new[] { Root, Sdk, Avd, Keymaps, Logs, Downloads })
+        foreach (var dir in new[] { Root, Sdk, Avd, Keymaps, Logs, Downloads, AndroidUser })
             Directory.CreateDirectory(dir);
     }
 }

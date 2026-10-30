@@ -51,6 +51,8 @@ public sealed class EmulatorHost(AppPaths paths, AdbClient adb) : IDisposable
         if (!File.Exists(paths.EmulatorExe))
             throw new FileNotFoundException("The Android Emulator is not installed yet.", paths.EmulatorExe);
 
+        paths.EnsureCreated();
+
         var (console, grpc) = AllocatePorts(_running.Values.Select(r => r.ConsolePort).ToHashSet(), IsPortFree);
 
         var psi = new ProcessStartInfo(paths.EmulatorExe)
@@ -107,7 +109,8 @@ public sealed class EmulatorHost(AppPaths paths, AdbClient adb) : IDisposable
 
         await adb.KillEmulatorAsync(instance.Serial, ct);
         using var timeout = CancellationTokenSource.CreateLinkedTokenSource(ct);
-        timeout.CancelAfter(TimeSpan.FromSeconds(20));
+        // Saving the quick-boot snapshot can take a while with a lot of RAM; killing early corrupts it.
+        timeout.CancelAfter(TimeSpan.FromSeconds(60));
         try
         {
             await instance.Process.WaitForExitAsync(timeout.Token);
@@ -137,8 +140,8 @@ public sealed class EmulatorHost(AppPaths paths, AdbClient adb) : IDisposable
         ["ANDROID_SDK_ROOT"] = paths.Sdk,
         ["ANDROID_HOME"] = paths.Sdk,
         ["ANDROID_AVD_HOME"] = paths.Avd,
-        ["ANDROID_USER_HOME"] = Path.Combine(paths.Root, "android-user"),
-        ["ANDROID_EMULATOR_HOME"] = Path.Combine(paths.Root, "android-user"),
+        ["ANDROID_USER_HOME"] = paths.AndroidUser,
+        ["ANDROID_EMULATOR_HOME"] = paths.AndroidUser,
     };
 
     /// <summary>Picks the first free even console port (adb uses port+1) and a matching gRPC port.</summary>
