@@ -24,6 +24,12 @@ public partial class App : Application
         base.OnStartup(e);
         DispatcherUnhandledException += OnUnhandled;
 
+        if (ScreenshotMode.TryParse(e.Args, out var shot))
+        {
+            ScreenshotMode.Run(this, shot);
+            return;
+        }
+
         _services = new AppServices();
         Log.Info($"EmuDroid {AppServices.Version} starting");
         var window = new MainWindow { DataContext = new MainViewModel(_services) };

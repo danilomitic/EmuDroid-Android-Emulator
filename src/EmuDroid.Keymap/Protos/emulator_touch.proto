@@ -1,0 +1,33 @@
+// Minimal subset of the Android Emulator gRPC API (emulator_controller.proto, Apache 2.0, The Android Open Source Project).
+// Only the touch input call is declared here. Package, service, method names and field numbers must match the emulator.
+syntax = "proto3";
+
+package android.emulation.control;
+
+option csharp_namespace = "EmuDroid.Keymap.Grpc";
+
+import "google/protobuf/empty.proto";
+
+service EmulatorController {
+    rpc sendTouch(TouchEvent) returns (google.protobuf.Empty) {}
+}
+
+message Touch {
+    int32 x = 1;
+    int32 y = 2;
+    int32 identifier = 3;
+    // 0 = finger lifted, > 0 = finger down.
+    int32 pressure = 4;
+    int32 touch_major = 5;
+    int32 touch_minor = 6;
+    enum EventExpiration {
+        EVENT_EXPIRATION_UNSPECIFIED = 0;
+        NEVER_EXPIRE = 1;
+    }
+    EventExpiration expiration = 7;
+}
+
+message TouchEvent {
+    repeated Touch touches = 1;
+    int32 display = 2;
+}

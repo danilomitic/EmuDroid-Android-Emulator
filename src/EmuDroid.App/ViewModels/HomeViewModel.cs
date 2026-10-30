@@ -33,6 +33,7 @@ public sealed partial class HomeViewModel : ObservableObject
             if (vm is null) return;
             vm.State = e.State;
             if (e.Error is not null) vm.Error = e.Error;
+            if (e.State == InstanceState.Stopped) _services.CloseKeymap(e.InstanceId);
         });
 
     public void Add(InstanceConfig cfg)

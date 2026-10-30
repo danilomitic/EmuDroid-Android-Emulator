@@ -36,6 +36,11 @@ public sealed partial class MainViewModel : ObservableObject
     [ObservableProperty] private string? _toast;
     [ObservableProperty] private bool _toastIsError;
 
+    partial void OnPageChanged(Page value)
+    {
+        if (value == Page.Settings) _ = Settings?.LoadAsync();
+    }
+
     public bool IsHome { get => Page == Page.Home; set { if (value) Page = Page.Home; } }
     public bool IsSettings { get => Page == Page.Settings; set { if (value) Page = Page.Settings; } }
     public string VersionText => $"Version {AppServices.Version}";

@@ -182,6 +182,31 @@ public sealed partial class InstanceViewModel : ObservableObject
         }
     }
 
+    /// <summary>Opens the keyboard &amp; mouse controls editor over the running emulator.</summary>
+    [RelayCommand]
+    private void OpenKeymap()
+    {
+        var running = _services.Emulators.Get(Config.Id);
+        if (running is null) return;
+        try
+        {
+            if (!_services.KeymapSessions.TryGetValue(Config.Id, out var session))
+            {
+                session = new Keymap.KeymapSession(_services.Paths.Keymaps, Config.Id, running.ConsolePort, running.GrpcPort,
+                    Config.Width, Config.Height, _services.Adb, _services.Settings.OverlayHotkey);
+                session.Closed += (_, _) => _services.KeymapSessions.Remove(Config.Id);
+                _services.KeymapSessions[Config.Id] = session;
+                session.Start();
+            }
+            session.Edit();
+        }
+        catch (Exception e)
+        {
+            Log.Error("Opening controls failed", e);
+            Error = "Could not open keyboard controls: " + Format.Error(e);
+        }
+    }
+
     [RelayCommand]
     private void OpenFolder() =>
         Process.Start(new ProcessStartInfo(_services.Avds.AvdDirectory(Config.Id)) { UseShellExecute = true });

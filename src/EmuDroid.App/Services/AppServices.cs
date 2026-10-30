@@ -13,9 +13,9 @@ public sealed class AppServices : IDisposable
 {
     private Task<SdkCatalog>? _catalog;
 
-    public AppServices()
+    public AppServices(string? root = null)
     {
-        Paths = new AppPaths();
+        Paths = new AppPaths(root);
         Paths.EnsureCreated();
         Log.Init(Paths);
         Settings = AppSettings.Load(Paths);
@@ -41,6 +41,14 @@ public sealed class AppServices : IDisposable
     public AvdManager Avds { get; }
     public AdbClient Adb { get; }
     public EmulatorHost Emulators { get; }
+
+    /// <summary>Open keyboard &amp; mouse control sessions, per instance id.</summary>
+    public Dictionary<string, Keymap.KeymapSession> KeymapSessions { get; } = [];
+
+    public void CloseKeymap(string instanceId)
+    {
+        if (KeymapSessions.Remove(instanceId, out var session)) session.Close();
+    }
 
     /// <summary>Google's catalog, loaded once per session. A failed load is retried next time.</summary>
     public Task<SdkCatalog> GetCatalogAsync()

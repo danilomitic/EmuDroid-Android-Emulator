@@ -54,7 +54,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <ScrollViewer VerticalScrollBarVisibility="Auto" MaxWidth="640" HorizontalAlignment="Left">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" MaxWidth="640" HorizontalAlignment="Left">
                 <Grid>
                     <!-- Welcome -->
                     <StackPanel Visibility="{Binding Step, Converter={StaticResource EnumToVis}, ConverterParameter=Welcome}">
